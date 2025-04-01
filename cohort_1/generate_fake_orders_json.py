@@ -219,8 +219,8 @@ def stop_active_quries():
 
 while True:
     # Sleep for a minute
-    time.sleep(60)
-    number_of_records_to_be_written_so_far = spark.read.parquet(WRITE_PATH).count()
+    time.sleep(600)
+    number_of_records_to_be_written_so_far = spark.read.json(WRITE_PATH).count()
     if number_of_records_to_be_written_so_far > NUMBER_OF_RECORDS_TO_CREATE:
         stop_active_quries()
     else:
