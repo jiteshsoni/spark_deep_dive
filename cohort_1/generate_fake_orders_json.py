@@ -292,3 +292,11 @@ analyze_and_display_parquet_stats(WRITE_PATH,count_records=True)
 # COMMAND ----------
 
 display(dbutils.fs.ls(WRITE_PATH))
+
+# COMMAND ----------
+
+display(spark.read.json(WRITE_PATH))
+
+# COMMAND ----------
+
+
