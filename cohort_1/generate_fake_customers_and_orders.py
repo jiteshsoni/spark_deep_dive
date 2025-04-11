@@ -60,8 +60,8 @@ fake = Faker()
 # -------------------------------
 # Parameters
 # -------------------------------
-PARTITIONS = 20
-NUM_CUSTOMERS = 100_000    # Targeting 100k rows
+PARTITIONS = 50
+NUM_CUSTOMERS = 500_000    # Targeting 500k rows
 TARGET_TABLE = "main.default.fake_customers"  # Delta table name
 
 # -------------------------------
@@ -172,7 +172,7 @@ orders_schema = StructType([
 # Adjust PARTITIONS based on your cluster's capacity.
 PARTITIONS = 100  
 # We want a total of 1 billion rows.
-NUM_ORDERS = 1_000_000_000
+NUM_ORDERS = 2_000_000_000
 
 orders_dataspec = (
     dg.DataGenerator(spark, name="orders_data", partitions=PARTITIONS, rows=NUM_ORDERS)
@@ -182,7 +182,7 @@ orders_dataspec = (
     # Generate an order timestamp between two dates.
     .withColumnSpec("order_timestamp", begin="2023-01-01 00:00:00", end="2023-12-31 23:59:59", random=True)
     # Customer ID between 1 and 1,000,000.
-    .withColumnSpec("customer_id", minValue=1, maxValue=1_000_000, random=True)
+    .withColumnSpec("customer_id", minValue=1, maxValue=NUM_CUSTOMERS, random=True)
     # Order amount between $5 and $5000.
     .withColumnSpec("order_amount", minValue=5.0, maxValue=5000.0, random=True)
     # Product category chosen from a list.
